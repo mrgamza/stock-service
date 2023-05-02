@@ -1,0 +1,16 @@
+version: '3'
+services:
+  gateway-service:
+    container_name: go-service
+    image: go-service
+    restart: always
+
+  gateway-web:
+    container_name: go-web
+    image: go-web
+    restart: always
+    depends_on:
+      - gateway-service
+    command: ['nginx', '-g', 'daemon off;']
+    ports:
+      - 10600:80
